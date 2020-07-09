@@ -14,8 +14,19 @@
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
+  <div id="container" *ngIf="folder=='Home'">
     <strong class="capitalize">{{ folder }}</strong>
     <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
   </div>
+
+  <div id="container" *ngIf="folder=='Outbox'">
+    <strong class="capitalize">{{ folder }}</strong>
+    <p>Explore My Ass</p>
+  </div>
+
+  <div id="container" *ngIf="folder=='Hire'">
+    <strong class="capitalize">{{ folder }}</strong>
+    <p>Explore My Ass</p>
+  </div>
+
 </ion-content>

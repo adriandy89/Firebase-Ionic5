@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 
 import { FirebaseService } from '../services/firebase.service';
@@ -27,7 +27,7 @@ export class FolderPage implements OnInit {
   constructor(
     public menuCtrl: MenuController,
     private activatedRoute: ActivatedRoute,
-
+    private route: Router,
     private firebaseService: FirebaseService,
     public fb: FormBuilder
     ) {
@@ -58,6 +58,10 @@ export class FolderPage implements OnInit {
       console.log(this.studentList);
 
     });
+  }
+
+  logout(){
+    this.firebaseService.logoutUser().then( res => this.route.navigate(['/']))
   }
 
   CreateRecord() {

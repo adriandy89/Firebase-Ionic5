@@ -38,6 +38,14 @@
    </ion-list>
     </ion-content>
   
+    <ion-content *ngIf="folder=='Trash'">
+      <div id="container">
+        <strong class="capitalize">{{ folder }}</strong>
+        <p>Explore My Ass</p>
+        <ion-button (click)="logout()">LOGOUT</ion-button>
+      </div>
+    </ion-content>
+
   <ion-content *ngIf="folder=='Hire'">
     <div id="container">
       <ion-card>

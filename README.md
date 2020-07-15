@@ -1,6 +1,6 @@
 # FIREBASE AUTHENTICATION AND CRUD OPERATIONS
 
-Ionic 5 + Angular, Reigister and Login Users + CRUD Operations with Firebase.
+Ionic 5 + Angular, Register and Login Users + CRUD Operations with Firebase.
 
 ## EXAMPLE DEMO APP:
 

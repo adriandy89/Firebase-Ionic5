@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { MenuController } from '@ionic/angular';
 
 import { FirebaseService } from '../services/firebase.service';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
@@ -24,6 +25,7 @@ export class FolderPage implements OnInit {
   studentForm: FormGroup;
 
   constructor(
+    public menuCtrl: MenuController,
     private activatedRoute: ActivatedRoute,
 
     private firebaseService: FirebaseService,
@@ -33,13 +35,14 @@ export class FolderPage implements OnInit {
      }
 
   ngOnInit() {
+    this.menuCtrl.enable(true)
     this.folder = this.activatedRoute.snapshot.paramMap.get('id');
 
     this.studentForm = this.fb.group({
       Name: ['', [Validators.required]],
       Age: ['', [Validators.required]],
       Address: ['', [Validators.required]]
-    })
+    })    
 
     this.firebaseService.read_students().subscribe(data => {
 
@@ -85,6 +88,15 @@ export class FolderPage implements OnInit {
     record['Address'] = recordRow.EditAddress;
     this.firebaseService.update_student(recordRow.id, record);
     recordRow.isEdit = false;
+  }
+
+  doRefresh(event) {
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 2000);
   }
 
 }

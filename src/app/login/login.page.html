@@ -1,0 +1,132 @@
+<ion-content>
+  <div class="sign-container gradient-1">
+
+    <div class="header">
+      <div class="title ion-text-center">
+        <img src="../../assets/logo.webp" alt="">
+      </div>
+    </div>
+
+    <div class="login-container">      
+      <ion-list lines="none" class="form fade-in">
+        
+        <form class="form" [formGroup]="validations_form_login" (ngSubmit)="loginUser(validations_form_login.value)">
+          <ion-title class="ion-padding ion-text-center" style="color: aliceblue;">Login</ion-title>
+          <ion-item>
+            <ion-label>Email</ion-label>
+            <ion-input class="ion-text-right" type="text" formControlName="email" [(ngModel)]="newEmail"></ion-input>
+            <ion-icon slot="end" name="at"></ion-icon>
+          </ion-item>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.email">
+              <div class="error-message"
+                *ngIf="validations_form_login.get('email').hasError(validation.type) && (validations_form_login.get('email').dirty || validations_form_login.get('email').touched)">
+                {{ validation.message }}
+              </div>
+            </ng-container>
+          </div>
+
+          <ion-item>
+            <ion-label>Password</ion-label>
+            <ion-input class="ion-text-right" type="password" formControlName="password" required></ion-input>
+            <ion-icon slot="end" name="key"></ion-icon>
+          </ion-item>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.password">
+              <div class="error-message"
+                *ngIf="validations_form_login.get('password').hasError(validation.type) && (validations_form_login.get('password').dirty || validations_form_login.get('password').touched)">
+                {{ validation.message }}
+              </div>
+            </ng-container>
+          </div>
+
+          <div class="ion-text-center fade-in">
+            <ion-button class="green-button" type="submit" [disabled]="!validations_form_login.valid">Login</ion-button>
+          </div>
+
+          <label class="error-message">{{errorMessageLogin}}</label>
+          <label class="success-message">{{successMessage}}</label>
+        </form>
+      </ion-list>
+    </div>
+
+
+
+
+    <div class="sign-up-container gradient-2" [ngClass]="{'active': signupView}">
+
+      <div class="toggle-text ion-text-center" tappable (click)="toggleSignUpView()">
+
+        <span *ngIf="!signupView" [ngClass]="{'fade-in': !signupView, 'fade-out': signupView}">Sign Up</span>
+        <span *ngIf="signupView" [ngClass]="{'fade-in': signupView, 'fade-out': !signupView}">Login</span>
+        <br>
+        <ion-icon name="arrow-round-up" *ngIf="!signupView"
+          [ngClass]="{'fade-in': !signupView, 'fade-out': signupView}"></ion-icon>
+        <ion-icon name="arrow-round-down" *ngIf="signupView"
+          [ngClass]="{'fade-in': signupView, 'fade-out': !signupView}"></ion-icon>
+
+      </div>
+
+      <ion-list lines="none" class="form" [ngClass]="{'fade-in': signupView, 'fade-out': !signupView}">
+
+        <form class="form" [formGroup]="validations_form" (ngSubmit)="tryRegister(validations_form.value)">
+
+          <ion-item>
+            <ion-label>Name</ion-label>
+            <ion-input type="text" formControlName="displayName" class="ion-text-right"></ion-input>
+            <ion-icon slot="end" name="person"></ion-icon>
+          </ion-item>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.displayName">
+              <div class="error-message"
+                *ngIf="validations_form.get('displayName').hasError(validation.type) && (validations_form.get('displayName').dirty || validations_form.get('displayName').touched)">
+                {{ validation.message }}
+              </div>
+            </ng-container>
+          </div>
+
+          <ion-item>
+            <ion-label>Email</ion-label>
+            <ion-input type="text" formControlName="email" class="ion-text-right"></ion-input>
+            <ion-icon slot="end" name="at"></ion-icon>
+          </ion-item>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.email">
+              <div class="error-message"
+                *ngIf="validations_form.get('email').hasError(validation.type) && (validations_form.get('email').dirty || validations_form.get('email').touched)">
+                {{ validation.message }}
+              </div>
+            </ng-container>
+          </div>
+
+          <ion-item>
+            <ion-label>Password</ion-label>
+            <ion-input type="password" formControlName="password" required class="ion-text-right"></ion-input>
+            <ion-icon slot="end" name="key"></ion-icon>
+          </ion-item>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.password">
+              <div class="error-message"
+                *ngIf="validations_form.get('password').hasError(validation.type) && (validations_form.get('password').dirty || validations_form.get('password').touched)">
+                {{ validation.message }}
+              </div>
+            </ng-container>
+          </div>
+
+
+          <div class="ion-text-center" [ngClass]="{'fade-in': signupView, 'fade-out': !signupView}">
+            <ion-button class="gray-button" type="submit" [disabled]="!validations_form.valid">
+              Register
+            </ion-button>
+          </div>
+
+          <label class="error-message">{{errorMessage}}</label>
+          <label class="success-message">{{successMessage}}</label>
+        </form>
+
+      </ion-list>
+
+    </div>
+
+  </div>
+</ion-content>

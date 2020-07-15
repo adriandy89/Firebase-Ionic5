@@ -28,7 +28,12 @@ export class FirebaseService {
   isLoggedIn(): boolean {
     const  user  =  JSON.parse(localStorage.getItem('user'));
     return  user  !==  null;
-}
+  }
+
+  getUser() {
+    const  user  =  JSON.parse(localStorage.getItem('user'));
+    return  user;
+  }
 
   // Auth - Firebase
   

@@ -24,6 +24,8 @@ export class FolderPage implements OnInit {
 
   studentForm: FormGroup;
 
+  user;
+
   constructor(
     public menuCtrl: MenuController,
     private activatedRoute: ActivatedRoute,
@@ -31,10 +33,16 @@ export class FolderPage implements OnInit {
     private firebaseService: FirebaseService,
     public fb: FormBuilder
     ) {
-      this.studentData = {} as StudentData;
+      this.studentData = {} as StudentData;      
      }
 
   ngOnInit() {
+    this.user = this.firebaseService.getUser();
+    console.log(this.user)
+    if (!this.firebaseService.isLoggedIn()) {
+      this.logout()
+    }
+
     this.menuCtrl.enable(true)
     this.folder = this.activatedRoute.snapshot.paramMap.get('id');
 

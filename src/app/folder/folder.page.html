@@ -10,72 +10,64 @@
 <!-- Custom Refresher Content -->
 <ion-content>
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content
-      pullingIcon="chevron-down-circle-outline"
-      pullingText="Pull to refresh"
-      refreshingSpinner="circles"
-      refreshingText="Refreshing...">
+    <ion-refresher-content pullingIcon="chevron-down-circle-outline" pullingText="Pull to refresh"
+      refreshingSpinner="circles" refreshingText="Refreshing...">
     </ion-refresher-content>
   </ion-refresher>
-  <ion-content *ngIf="folder=='Home'">
-    <div id="container">
-      <strong class="capitalize">{{ folder }}</strong>
-      <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI
-          Components</a></p>
-    </div>
-  </ion-content>
-  
-  <ion-content *ngIf="folder=='Outbox'">
-    <div id="container">
-      <strong class="capitalize">{{ folder }}</strong>
-      <p>Explore My Ass</p>
-    </div>
-  </ion-content>
-  
-  <ion-content *ngIf="folder=='Favorites'">
-    <ion-list  style="width:100%;height:100%">
-      <iframe src="https://thingsboard.uclv.cu/dashboard/6d2c8760-b721-11ea-a0ce-e527f67127c3?publicId=64abda20-b5df-11ea-a0ce-e527f67127c3"  style="width:100%;height:100%" scrolling="yes" ></iframe>
-   </ion-list>
-    </ion-content>
-  
-    <ion-content *ngIf="folder=='Trash'">
-      <div id="container">
-        <strong class="capitalize">{{ folder }}</strong>
-        <p>Explore My Ass</p>
-        <ion-button (click)="logout()">LOGOUT</ion-button>
-      </div>
-    </ion-content>
 
-  <ion-content *ngIf="folder=='Hire'">
+  <ion-content *ngIf="folder=='Home'" class="form fade-in">
+    <div id="container" class="ion-padding">
+      <strong class="capitalize">Hello {{ user.displayName }}</strong> <br><br>
+      <p>Explore My <a target="_blank" rel="noopener noreferrer" href="https://github.com/adriandy89">GitHub</a></p>
+    </div>
+  </ion-content>
+
+  <ion-content *ngIf="folder=='Favorites'" class="form fade-in">
+    <ion-list style="width:100%;height:100%">
+      <iframe
+        src="https://photostudio-adrian.herokuapp.com/"
+        style="width:100%;height:100%" scrolling="yes"></iframe>
+    </ion-list>
+  </ion-content>
+
+  <ion-content  class="ion-text-center ion-padding" *ngIf="folder=='User'">
+    <ion-list lines="none" class="form fade-in">
+      <ion-icon slot="start" name="mail"></ion-icon>
+      <strong>Email: {{ user.email }}</strong> <br>
+      <ion-button class="ion-padding" (click)="logout()">LOGOUT</ion-button>
+  </ion-list>
+  </ion-content>
+
+  <ion-content *ngIf="folder=='CRUD'" class="form fade-in">
     <div id="container">
       <ion-card>
         <form [formGroup]="studentForm" (ngSubmit)="CreateRecord()">
-  
+
           <ion-item>
             <ion-label position="floating">Name</ion-label>
             <ion-input formControlName="Name"></ion-input>
           </ion-item>
-    
+
           <ion-item>
             <ion-label position="floating">Age</ion-label>
             <ion-input formControlName="Age"></ion-input>
           </ion-item>
-    
+
           <ion-item>
             <ion-label position="floating">Address</ion-label>
             <ion-input formControlName="Address"></ion-input>
           </ion-item>
-    
+
           <ion-item>
             <ion-button (click)="CreateRecord()" [disabled]="studentForm.invalid">
               <ion-icon size="small" slot="icon-only" name="add"></ion-icon>
               &nbsp;Create Record
             </ion-button>
           </ion-item>
-    
+
         </form>
-    
-    
+
+
         <ion-card *ngFor="let item of studentList" color="primary">
           <span *ngIf="!item.isEdit; else elseBlock">
             <ion-card-header>
@@ -83,14 +75,14 @@
               <ion-card-subtitle>From: {{item.Address}}</ion-card-subtitle>
             </ion-card-header>
             <ion-card-content>
-    
+
               <ion-button shape="round" color="secondary" size="small" (click)="EditRecord(item)">
                 <ion-icon size="small" slot="icon-only" name="create"></ion-icon>
-    
+
               </ion-button>
               <ion-button shape="round" color="danger" size="small" (click)="RemoveRecord(item.id)">
                 <ion-icon size="small" slot="icon-only" name="trash"></ion-icon>
-    
+
               </ion-button>
             </ion-card-content>
           </span>
@@ -133,10 +125,9 @@
           </ng-template>
         </ion-card>
       </ion-card>
-      
-  
+
+
     </div>
-  
+
   </ion-content>
 </ion-content>
-

@@ -18,32 +18,22 @@ export class AppComponent implements OnInit {
       icon: 'mail'
     },
     {
-      title: 'Outbox',
-      url: '/folder/Outbox',
-      icon: 'paper-plane'
-    },
-    {
       title: 'Favorites',
       url: '/folder/Favorites',
       icon: 'heart'
     },
     {
-      title: 'Archived',
-      url: '/folder/Archived',
-      icon: 'archive'
-    },
-    {
-      title: 'Trash',
-      url: '/folder/Trash',
-      icon: 'trash'
-    },
-    {
-      title: 'Hire',
-      url: '/folder/Hire',
+      title: 'CRUD',
+      url: '/folder/CRUD',
       icon: 'warning'
+    },
+    {
+      title: 'User Account',
+      url: '/folder/User',
+      icon: 'person'
     }
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
+  public labels = ['Friends', 'Notes'];
 
   constructor(
     private platform: Platform,

@@ -3,11 +3,11 @@
 
     <div class="header">
       <div class="title ion-text-center">
-        <img src="../../assets/logo.webp" alt="">
+        <img src="../../assets/logo.png" alt="">
       </div>
     </div>
 
-    <div class="login-container">      
+    <div class="login-container"  *ngIf="signupView==false">      
       <ion-list lines="none" class="form fade-in">
         
         <form class="form" [formGroup]="validations_form_login" (ngSubmit)="loginUser(validations_form_login.value)">
@@ -19,7 +19,7 @@
           </ion-item>
           <div class="validation-errors">
             <ng-container *ngFor="let validation of validation_messages.email">
-              <div class="error-message"
+              <div class="error-message ion-text-center ion-padding-bottom"
                 *ngIf="validations_form_login.get('email').hasError(validation.type) && (validations_form_login.get('email').dirty || validations_form_login.get('email').touched)">
                 {{ validation.message }}
               </div>
@@ -33,7 +33,7 @@
           </ion-item>
           <div class="validation-errors">
             <ng-container *ngFor="let validation of validation_messages.password">
-              <div class="error-message"
+              <div class="error-message ion-text-center ion-padding-bottom"
                 *ngIf="validations_form_login.get('password').hasError(validation.type) && (validations_form_login.get('password').dirty || validations_form_login.get('password').touched)">
                 {{ validation.message }}
               </div>
@@ -41,7 +41,8 @@
           </div>
 
           <div class="ion-text-center fade-in">
-            <ion-button class="green-button" type="submit" [disabled]="!validations_form_login.valid">Login</ion-button>
+            <ion-label class="ion-padding ion-margin-top" style="color: aliceblue; text-decoration: underline;" (click)="toggleSignUpView()"> Register</ion-label>
+            <ion-button class="green-button" type="submit" [disabled]="!validations_form_login.valid">Login</ion-button>            
           </div>
 
           <label class="error-message">{{errorMessageLogin}}</label>
@@ -53,30 +54,18 @@
 
 
 
-    <div class="sign-up-container gradient-2" [ngClass]="{'active': signupView}">
+    <div class="sign-container" *ngIf="signupView==true">
 
-      <div class="toggle-text ion-text-center" tappable (click)="toggleSignUpView()">
-
-        <span *ngIf="!signupView" [ngClass]="{'fade-in': !signupView, 'fade-out': signupView}">Sign Up</span>
-        <span *ngIf="signupView" [ngClass]="{'fade-in': signupView, 'fade-out': !signupView}">Login</span>
-        <br>
-        <ion-icon name="arrow-round-up" *ngIf="!signupView"
-          [ngClass]="{'fade-in': !signupView, 'fade-out': signupView}"></ion-icon>
-        <ion-icon name="arrow-round-down" *ngIf="signupView"
-          [ngClass]="{'fade-in': signupView, 'fade-out': !signupView}"></ion-icon>
-
-      </div>
-
-      <ion-list lines="none" class="form" [ngClass]="{'fade-in': signupView, 'fade-out': !signupView}">
+      <ion-list lines="none" class="form fade-in">
 
         <form class="form" [formGroup]="validations_form" (ngSubmit)="tryRegister(validations_form.value)">
-
+          <ion-title class="ion-padding ion-text-center" style="color: aliceblue;">Register</ion-title>
           <ion-item>
             <ion-label>Name</ion-label>
             <ion-input type="text" formControlName="displayName" class="ion-text-right"></ion-input>
             <ion-icon slot="end" name="person"></ion-icon>
           </ion-item>
-          <div class="validation-errors">
+          <div class="validation-errors ion-text-center ion-padding-bottom">
             <ng-container *ngFor="let validation of validation_messages.displayName">
               <div class="error-message"
                 *ngIf="validations_form.get('displayName').hasError(validation.type) && (validations_form.get('displayName').dirty || validations_form.get('displayName').touched)">
@@ -90,7 +79,7 @@
             <ion-input type="text" formControlName="email" class="ion-text-right"></ion-input>
             <ion-icon slot="end" name="at"></ion-icon>
           </ion-item>
-          <div class="validation-errors">
+          <div class="validation-errors ion-text-center ion-padding-bottom">
             <ng-container *ngFor="let validation of validation_messages.email">
               <div class="error-message"
                 *ngIf="validations_form.get('email').hasError(validation.type) && (validations_form.get('email').dirty || validations_form.get('email').touched)">
@@ -104,7 +93,7 @@
             <ion-input type="password" formControlName="password" required class="ion-text-right"></ion-input>
             <ion-icon slot="end" name="key"></ion-icon>
           </ion-item>
-          <div class="validation-errors">
+          <div class="validation-errors ion-text-center ion-padding-bottom">
             <ng-container *ngFor="let validation of validation_messages.password">
               <div class="error-message"
                 *ngIf="validations_form.get('password').hasError(validation.type) && (validations_form.get('password').dirty || validations_form.get('password').touched)">
@@ -115,7 +104,8 @@
 
 
           <div class="ion-text-center" [ngClass]="{'fade-in': signupView, 'fade-out': !signupView}">
-            <ion-button class="gray-button" type="submit" [disabled]="!validations_form.valid">
+            <ion-label class="ion-padding ion-margin-top" style="color: aliceblue; text-decoration: underline;" (click)="toggleSignUpView()">Login</ion-label>
+            <ion-button class="green-button" type="submit" [disabled]="!validations_form.valid">
               Register
             </ion-button>
           </div>
